@@ -12,5 +12,20 @@ def pytest_addoption(parser):
   
 
 @fixture(scope='function')
-def browser():
-  pass
+def browser(website):
+  if website == 'heroku':
+    driver = Browser().firefox()
+  else:
+    driver = Browser().chrome()
+  
+  yield driver
+  driver.quit()
+
+
+@fixture(scope='session')
+def app_config(url):
+  with open(f'config.json', 'r') as config_file:
+    config = json_load(config_file)
+  config['url'] = url
+  config_file.close()
+  return config
