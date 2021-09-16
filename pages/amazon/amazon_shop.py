@@ -7,10 +7,9 @@ from selenium.webdriver.common.action_chains import ActionChains
 from pages.home_page import BasePage
 
 
-
 class Locators:
   pass
 
 
-class HerokuPage():
+class AmazonPage():
   pass
