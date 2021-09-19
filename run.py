@@ -29,7 +29,12 @@ MARKER = args.m
 
 print(f'Tests are running in {BROWSER} browser')
 
-pytest_run = [f'--browser={BROWSER} -n3']\
+pytest_run = [f'--browser={BROWSER}']
+
+if 'amazon' in MARKER:
+  pytest_run += ['n1']
+else:
+  pytest_run += ['n4']
   
 if MARKER:
   print(f'Tests running with {MARKER}')

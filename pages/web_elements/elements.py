@@ -20,6 +20,13 @@ class Elements(Browser):
     self.web_element = element
     return None
   
+  def find_all(self):
+    element = WebDriverWait(self.driver, 10).until(
+      ec.visibility_of_elements_located(locator=self.locator)
+    )
+    self.web_element = element
+    return None
+  
   def input_text(self, txt):
     self.web_element.send_keys(txt)
     return None
