@@ -1,6 +1,3 @@
-"""
-Module for tests running with parameters described in README file.
-"""
 import argparse
 import sys
 import pytest
@@ -17,27 +14,34 @@ parser.add_argument('--browser',
                     ])
 
 parser.add_argument('--m',
-                    help='Marker to tests run',
+                    help="Website for tests run",
+                    action='store',
                     choices=[
                       'amazon',
-                      'heroku'
-                      ])
+                      'heroku',
+                      'chrome',
+                      'firefox'])
 
 args = parser.parse_args()
 BROWSER = args.browser
 MARKER = args.m
 
+print(MARKER)
+
 print(f'Tests are running in {BROWSER} browser')
 
 pytest_run = [f'--browser={BROWSER}']
+print(f'{MARKER}')
 
-if 'amazon' in MARKER:
-  pytest_run += ['n1']
-else:
-  pytest_run += ['n4']
-  
 if MARKER:
-  print(f'Tests running with {MARKER}')
+  print(f'{MARKER}')
   pytest_run += ['-m', f'{MARKER}']
+
+if 'firefox' in BROWSER:
+  pytest_run += ['-n4']
+else:
+  pytest_run += ['-n1']
+  
+print(pytest_run)
   
 sys.exit(pytest.main(pytest_run))

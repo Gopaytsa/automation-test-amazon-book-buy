@@ -9,23 +9,15 @@ def pytest_addoption(parser):
     default='chrome',
     help='Browser for tests run'
   )
+    
   
-
 @fixture(scope='function')
-def browser(website):
-  if website == 'heroku':
-    driver = Browser().firefox()
-  else:
-    driver = Browser().chrome()
-  
-  yield driver
-  driver.quit()
-
-
-@fixture(scope='session')
-def app_config(url):
-  with open(f'config.json', 'r') as config_file:
-    config = json_load(config_file)
-  config['url'] = url
-  config_file.close()
-  return config
+def driver(request):
+    driver = request.config.getoption("--browser")
+    if 'firefox' in driver:
+      driver = Browser().firefox()
+    else:
+      driver = Browser().chrome()
+    
+      yield driver
+      driver.quit()

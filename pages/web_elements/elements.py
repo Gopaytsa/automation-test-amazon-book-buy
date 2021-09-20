@@ -1,27 +1,22 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec 
 
-from browser_control.browser import Browser
 
-
-class Elements(Browser):
-  def __init__(self, value, by):
-    self.driver = Browser().deriver
-    self.value = value
-    self.by = by
-    self.locator = (self.by, self.value)
+class Elements(object):
+  def __init__(self, browser, locator):
+    self.browser = browser
+    self.locator = locator
     self.web_element = None 
-    self.find()
     
   def find(self):
-    element = WebDriverWait(self.driver, 10).until(
-      ec.visibility_of_element_located(locator=self.locator)
+    element = WebDriverWait(self.browser, 10).until(
+      ec.visibility_of_element_located((self.locator))
     )
     self.web_element = element
     return None
   
   def find_all(self):
-    element = WebDriverWait(self.driver, 10).until(
+    element = WebDriverWait(self.browser, 10).until(
       ec.visibility_of_elements_located(locator=self.locator)
     )
     self.web_element = element
@@ -32,7 +27,7 @@ class Elements(Browser):
     return None
   
   def click(self):
-    element = WebDriverWait(self.driver, 10).until(
+    element = WebDriverWait(self.browser, 10).until(
       ec.element_to_be_clickable(locator=self.locator)
     )
     element.click()
