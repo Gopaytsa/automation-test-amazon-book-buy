@@ -10,37 +10,37 @@ class AmazonPage(BasePage):
   
   @property
   def department_dropdown(self):
-    locator = Locator(by=By.CSS_SELECTOR, value='#searchDropdownBox')
+    locator = Locator(by=By.CSS_SELECTOR, value='div#nav-search-dropdown-card')
     return Elements(self.browser, locator)
   
   @property
   def book_department(self):
-    locator = Locator(by=By.XPATH, value='//li/a')
+    locator = Locator(by=By.XPATH, value="//select[@id='searchDropdownBox']")
     return Elements(self.browser, locator)
       
   @property
   def search_box(self):
-    locator = Locator(by=By.ID, value='twotabsearchtextbox')
-    return Elements(self.browser, locator)
-  
-  @property
-  def submit_searc_button(self):
-    locator = Locator(by=By.ID, value='nav-search-submit-button')
+    locator = Locator(by=By.XPATH, value='//*[@id="twotabsearchtextbox"]')
     return Elements(self.browser, locator)
   
   @property
   def select_item(self):
-    locator = Locator(by=By.XPATH, value='//h2/a/span')
+    locator = Locator(by=By.XPATH, value="(.//*[normalize-space(text()) and normalize-space(.)='Part of: Bronco and Friends (2 Books)'])[1]/preceding::span[1]")
+    return Elements(self.browser, locator)
+  
+  @property
+  def select_specific_item(self):
+    locator = Locator(by=By.XPATH, value="(.//*[normalize-space(text()) and normalize-space(.)='Chris Ferrie'])[1]/preceding::span[2]")
     return Elements(self.browser, locator)
       
   @property
   def add_to_cart(self):
     locator = Locator(by=By.ID, value='add-to-cart-button')
-    return Elements(self.drivebrowserr, locator)
+    return Elements(self.browser, locator)
   
   @property
   def check_cart(self):
-    locator = Locator(by=By.ID, value='nav-cart-count')
+    locator = Locator(by=By.CSS_SELECTOR, value='span#nav-cart-count')
     return Elements(self.browser, locator)
   
   @property
@@ -50,7 +50,12 @@ class AmazonPage(BasePage):
   
   @property
   def item_price(self):
-    locator = Locator(by=By.CLASS_NAME, value='a-offscreen'[0])
+    locator = Locator(by=By.CSS_SELECTOR, value='span.a-color-price')
+    return Elements(self.browser, locator)
+  
+  @property
+  def item_page_price(self):
+    locator = Locator(by=By.CSS_SELECTOR, value='span#price')
     return Elements(self.browser, locator)
   
   @property
@@ -60,42 +65,37 @@ class AmazonPage(BasePage):
   
   @property
   def shopping_cart_page(self):
-    locator = Locator(by=By.CSS_SELECTOR, value='div#sc-active-cart h1')
+    locator = Locator(by=By.TAG_NAME, value='h1')
     return Elements(self.browser, locator)
   
   @property
-  def cart_page_subtotal(self):
-    locator = Locator(by=By.ID, value='sc-subtotal-label-activecart')
+  def items_names_in_cart_on_cart_page(self):
+    locator = Locator(by=By.CSS_SELECTOR, value='span.a-truncate-cut')
     return Elements(self.browser, locator)
   
   @property
-  def cart_page_total_sum(self):
-    locator = Locator(by=By.CSS_SELECTOR, value='span#sc-subtotal-amount-activecart')
-    return Elements(self.browser, locator)
-  
-  @property
-  def item_name_in_cart_on_cart_page(self):
-    locator = Locator(by=By.CSS_SELECTOR, value='span.a-truncate-full')
-    return Elements(self.browser, locator)
-  
-  @property
-  def item_price_in_cart_on_cart_page(self):
+  def items_prices_in_cart_on_cart_page(self):
     locator = Locator(by=By.CSS_SELECTOR, value=('p.a-spacing-mini'))
     return Elements(self.browser, locator)
   
   @property
-  def first_item_is_a_gift(self):
-    locator = Locator(by=By.CSS_SELECTOR, value='input[type=checkbox]')
-    return Elements(self.browser, locator[1])
-  
-  @property
-  def change_quantity_of_first_item(self):
-    locator = Locator(by=By.CSS_SELECTOR, value='span.sc-action-quantity')
+  def total_sum(self):
+    locator = Locator(by=By.CSS_SELECTOR, value=('span#sc-subtotal-amount-activecart'))
     return Elements(self.browser, locator)
   
   @property
-  def select_three_items(self):
-    locator = Locator(by=By.CSS_SELECTOR, value='#a-popover-4 li:nth-child(4)')
+  def get_gift(self):
+    locator = Locator(by=By.CSS_SELECTOR, value='input[type=checkbox]')
+    return Elements(self.browser, locator)
+  
+  @property
+  def change_quantity_of_first_item(self):
+    locator = Locator(by=By.CSS_SELECTOR, value='select#quantity')
+    return Elements(self.browser, locator)
+  
+  @property
+  def current_quantity_of_first_item(self):
+    locator = Locator(by=By.CSS_SELECTOR, value='span.a-dropdown-prompt')
     return Elements(self.browser, locator)
   
   @property

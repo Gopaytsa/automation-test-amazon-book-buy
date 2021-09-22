@@ -1,5 +1,4 @@
 from pytest import fixture
-from json import load as json_load
 from browser_control.browser import Browser
 
 def pytest_addoption(parser):
@@ -19,5 +18,5 @@ def driver(request):
     else:
       driver = Browser().chrome()
     
-      yield driver
-      driver.quit()
+    yield driver
+    driver.quit()
