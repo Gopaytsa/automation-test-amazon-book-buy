@@ -3,7 +3,6 @@
 &ensp;&ensp;[Markers](#markers)  
 &ensp;&ensp;[Browser](#browser)  
 &ensp;&ensp;[Websites](#websites)   
-&ensp;&ensp;[Allure](#allure) 
 
 
 ## Local virtual environments
